@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://promptcentral-ai.vercel.app/sitemap.xml

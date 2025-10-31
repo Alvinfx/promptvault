@@ -1,0 +1,25 @@
+{
+	"dependencies": {
+		"@tanstack/react-query": "^5.90.5",
+		"@types/react": "^19.2.2",
+		"@types/react-dom": "^19.2.2",
+		"@vitejs/plugin-react": "^5.1.0",
+		"ethers": "^6.15.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-router-dom": "^7.9.4",
+		"typescript": "^5.9.3",
+		"viem": "^2.38.4",
+		"vite": "^7.1.12",
+		"wagmi": "^2.18.2"
+	},
+	"name": "irys-wallet",
+	"private": "true",
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	}
+}

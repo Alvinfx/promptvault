@@ -3,6 +3,7 @@
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   position: relative;
   overflow-x: hidden;
+  padding-top: 5rem;
 }
 
 /* AI-inspired geometric background */

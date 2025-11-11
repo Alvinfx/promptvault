@@ -3,6 +3,7 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { useConnect } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 import { useTheme } from '../context/ThemeContext';
+import { useState, useEffect } from 'react';
 import '../styles/Header.css';
 
 export default function Header() {
@@ -11,6 +12,7 @@ export default function Header() {
   const { disconnect } = useDisconnect();
   const { connect } = useConnect();
   const { theme, toggleTheme } = useTheme();
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const handleConnect = () => {
     connect({ connector: injected() });
@@ -20,7 +22,28 @@ export default function Header() {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const clientHeight = window.innerHeight;
+      const scrolledToBottom = scrollHeight - scrollTop - clientHeight < 100;
+      setShowScrollTop(scrolledToBottom);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
+    <>
     <header className="app-header">
       <div className="header-container">
         <Link to="/" className="logo">
@@ -72,5 +95,14 @@ export default function Header() {
         </div>
       </div>
     </header>
+    
+    <button 
+      className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+    >
+      ↑
+    </button>
+    </>
   );
 }

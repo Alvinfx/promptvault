@@ -589,26 +589,25 @@
 }
 
 .ai-platforms-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
 
 .ai-platform-btn {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.5rem 1rem;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
   background: var(--bg-primary);
   border: 2px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   position: relative;
   overflow: hidden;
@@ -642,12 +641,13 @@
 }
 
 .platform-icon {
-  font-size: 2rem;
+  font-size: 1.25rem;
   filter: drop-shadow(0 2px 4px var(--shadow));
 }
 
 .platform-name {
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .ai-platforms-hint {
@@ -711,6 +711,15 @@
   }
 
   .ai-platforms-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .ai-platform-btn {
+    padding: 0.6rem 0.85rem;
+    font-size: 0.85rem;
+  }
+  
+  .platform-icon {
+    font-size: 1.1rem;
   }
 }

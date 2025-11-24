@@ -27,51 +27,49 @@ export const promptTemplates: PromptTemplate[] = [
     description: 'Generate comprehensive research reports with citations and evidence-based analysis',
     category: 'Research',
     aiModel: 'ChatGPT, Claude, Gemini',
-    template: `#CONTEXT: Adopt the role of an expert researcher. Your task is to help the user by conducting thorough research on their specific challenge, regardless of field or industry.
+    template: `Conduct comprehensive research on {{subject}} and provide a detailed analysis.
 
-#ROLE: You are a comprehensive research analyst with expertise across multiple domains, capable of identifying challenges and proposing innovative solutions tailored to any field or subject matter.
+Research Question: {{research_question}}
 
-#RESPONSE GUIDELINES:
-1/ Identify Key Challenges: Provide 5 major challenges in the specified domain. For each challenge, include at least one verifiable data point with a specific source citation.
+Expertise Level: {{expertise_level}}
 
-2/ Analyze Each Challenge: Explain each challenge in detail, with clear attribution for all facts and statistics. Address root causes, populations most affected, and existing attempts at solutions. Important: Every factual claim must include a specific citation (author, publication, year, and if possible, URL).
+Provide your analysis in the following structure:
 
-3/ Propose Innovative Solutions: For each challenge, propose a unique solution (software-based or otherwise as appropriate to the domain). Cite relevant case studies, research papers, or examples where similar approaches have succeeded.
+1. IDENTIFY KEY CHALLENGES
+List 5 major challenges in this domain. For each challenge, include verifiable data points with specific source citations (author, publication, year, URL).
 
-4/ Solution Framework: Break down each solution into:
+2. DETAILED ANALYSIS
+For each challenge identified:
+- Explain the root causes
+- Identify populations most affected
+- Describe existing solution attempts
+- Cite all factual claims with specific sources
+
+3. INNOVATIVE SOLUTIONS
+For each challenge, propose a unique solution:
 - Core functionality and purpose
 - Key components or features
-- Value proposition with cited evidence of potential effectiveness
-- Implementation requirements (technical or otherwise)
-Important: Cite specific sources for any claims about effectiveness or feasibility.
+- Value proposition with cited evidence
+- Implementation requirements
+- Cite case studies or research papers supporting this approach
 
-5/ Evidence Base: Provide a dedicated "Sources and Evidence" section. Number each source consecutively and use these numbers as in-text citations. For each source, include:
+4. SOURCES AND EVIDENCE
+Provide a numbered list of all sources cited:
 - Author(s) and publication date
 - Title of work
 - Publication/platform
 - URL
-- Brief note on the source's credibility and relevance
+- Brief credibility note
 
-6/ Conclusion & Next Steps: Summarize key insights with citations for major claims. Provide an evidence-based action plan appropriate to the user's expertise level. Suggest further research paths with specific, cited resources.
+5. CONCLUSION & NEXT STEPS
+Summarize key insights with citations. Provide an evidence-based action plan tailored to {{expertise_level}} level. Suggest specific resources for further research.
 
-#TASK CRITERIA:
-1/ Every significant claim must be cited—no exceptions.
-2/ Adapt technical depth to match the user's indicated expertise level.
-3/ Balance theoretical knowledge with practical applications.
-4/ When uncertainty exists, clearly state limitations in current research while citing the most reliable available sources.
-5/ Avoid presenting speculation as fact—clearly distinguish between established knowledge (with citations) and informed suggestions.
-
-#INFORMATION ABOUT ME:
-My subject or area of interest: {{subject}}
-My expertise level: {{expertise_level}}
-My specific research question or challenge: {{research_question}}
-
-#RESPONSE FORMAT:
-- Use clear section headings and subheadings for navigation.
-- Apply bullet points for clarity where appropriate.
-- Include numbered citations in parentheses after each factual claim.
-- Provide a dedicated "Sources and Evidence" section at the end.
-- Close with a practical, actionable summary that references key sources.`,
+IMPORTANT REQUIREMENTS:
+- Cite every significant claim with numbered references
+- Adapt technical depth to {{expertise_level}} level
+- Balance theory with practical applications
+- Clearly distinguish established knowledge from informed suggestions
+- State limitations when research is uncertain`,
     variables: [
       {
         key: 'subject',
@@ -251,34 +249,56 @@ Give your output in: {{output_format}}
     description: 'Generate 30 engaging tweet ideas based on questions, misconceptions, and trust-builders',
     category: 'Marketing',
     aiModel: 'ChatGPT, Claude',
-    template: `CONTEXT: You are Twitter Generator GPT, a professional digital marketer who helps {{work_area}} build an audience on Twitter. You are a world-class expert in generating tweet ideas based on audience insights.
+    template: `QUESTIONS (10 tweet ideas for {{work_area}})
+These address problems {{target_audience}} wants to solve. Valuable, actionable questions demonstrating expertise in {{work_area}}.
 
-GOAL: I want you to generate 30 tweet ideas for my Twitter account. I will use these ideas to write tweets and get more engagement.
+1. [Core concept]
+   - Why it resonates: [Explanation]
+   - Target segment: [Specific audience]
+   - Best angle: [Approach]
 
-TWEET IDEAS FRAMEWORK:
-You must base your tweet ideas on questions (10 ideas), misconceptions (10 ideas), and trust-builders (10 ideas)
+2. [Core concept]
+   - Why it resonates: [Explanation]
+   - Target segment: [Specific audience]
+   - Best angle: [Approach]
 
-- Questions are necessary to get remembered for providing value. People want to solve a problem, and answering these questions will help you get engagement (for example, "How can I create a product logo without paying for a designer's services?")
+[Continue through 10]
 
-- Misconceptions are necessary to get the attention. If you can change how the person thinks in one tweet, you will get a new fan (for example, "The most important part of the branding is a product logo")
+MISCONCEPTIONS (10 tweet ideas)
+These challenge common beliefs in {{work_area}}. Ideas that change how {{target_audience}} thinks.
 
-- Trust-builders are necessary to build a connection with a new follower. People want to follow accounts that have the same values, struggles, goals, and mindset (for example, "I am afraid of negative feedback on my design, but I ask for it anyway")
+11. [Core concept]
+    - Why it resonates: [Explanation]
+    - Target segment: [Specific audience]
+    - Best angle: [Approach]
 
-TWEET IDEA CRITERIA:
-- Avoid writing tweets itself. Your goal is to generate ideas only. I will write tweets myself based on your ideas
-- Never return the completed tweets with hashtags. Focus only on generating ideas (CRITICAL RULE)
-- Focus on the overlooked and unconventional tweet ideas. I want to catch the attention easier
-- Align your tweet ideas with my audience's interests and my personal positioning on Twitter
-- Describe why you think each tweet idea is worth it. I want to understand your reasoning
+12. [Core concept]
+    - Why it resonates: [Explanation]
+    - Target segment: [Specific audience]
+    - Best angle: [Approach]
 
-INFORMATION ABOUT ME:
-- My personal positioning: {{personal_positioning}}
-- My target audience: {{target_audience}}
-{{#if product}}- Product I want to promote: {{product}}{{/if}}
-{{#if complexity}}- Desired complexity level: {{complexity}}{{/if}}
-{{#if creativity}}- Desired creativity level: {{creativity}}{{/if}}
+[Continue through 20]
 
-RESPONSE FORMATTING: Use Markdown to format your response.`,
+TRUST-BUILDERS (10 tweet ideas)
+These show shared values, struggles, goals aligned with: {{personal_positioning}}
+
+21. [Core concept]
+    - Why it resonates: [Explanation]
+    - Target segment: [Specific audience]
+    - Best angle: [Approach]
+
+22. [Core concept]
+    - Why it resonates: [Explanation]
+    - Target segment: [Specific audience]
+    - Best angle: [Approach]
+
+[Continue through 30]{{#if product}}
+
+Product Integration: Naturally weave {{product}} into relevant ideas{{/if}}{{#if complexity}}
+Complexity: {{complexity}}{{/if}}{{#if creativity}}
+Creativity: {{creativity}}{{/if}}
+
+Focus on overlooked and unconventional ideas aligned with the positioning and audience.`,
     variables: [
       {
         key: 'work_area',
@@ -336,40 +356,90 @@ RESPONSE FORMATTING: Use Markdown to format your response.`,
     description: 'Analyze business ideas with realistic feedback and validation',
     category: 'Business',
     aiModel: 'ChatGPT, Claude',
-    template: `You are a pragmatic business strategist with expertise in dissecting business ideas for real-world applicability.
+    template: `1. BUSINESS IDEA OVERVIEW
+{{business_idea}}
 
-TASK: Analyze the given business idea objectively, considering its genuine merits and potential pitfalls. Assume the roles of theoretical personas, offering realistic feedback on the idea's utility or lack thereof. Provide a blunt, balanced validation and recommendation.
-
-BUSINESS IDEA: {{business_idea}}
-
-When responding, provide the following analysis:
-
-1. BUSINESS IDEA OVERVIEW
-Summarize the core concept and value proposition
+Core concept and value proposition: [2-3 sentence summary]
 
 2. POTENTIAL MARKETS
-Identify 3-5 potential target markets with specific demographics
+
+Market 1: [Name]
+- Demographics: [Specific details]
+- Size estimate: [Numbers]
+- Accessibility: [How reachable]
+
+Market 2: [Name]
+- Demographics: [Specific details]
+- Size estimate: [Numbers]
+- Accessibility: [How reachable]
+
+Market 3: [Name]
+- Demographics: [Specific details]
+- Size estimate: [Numbers]
+- Accessibility: [How reachable]
+
+[Continue for 4-5 markets]
 
 3. PERSONA VALIDATIONS
-Create 3 realistic personas who would interact with this business:
-- Age and occupation
-- Pain points this business addresses
-- Honest validation: Does this solve their problem? Would they pay for it?
+
+Persona 1: [Name/Type]
+- Age, occupation, income level: [Details]
+- Specific pain points this addresses: [List]
+- Would they pay? [Brutally honest yes/no with reasoning]
+
+Persona 2: [Name/Type]
+- Age, occupation, income level: [Details]
+- Specific pain points this addresses: [List]
+- Would they pay? [Brutally honest yes/no with reasoning]
+
+Persona 3: [Name/Type]
+- Age, occupation, income level: [Details]
+- Specific pain points this addresses: [List]
+- Would they pay? [Brutally honest yes/no with reasoning]
 
 4. MARKET RISKS
-List 5-7 major risks and challenges this business would face
+
+1. Competition: [Specific analysis]
+2. Market timing: [Concerns]
+3. Execution challenges: [Realistic obstacles]
+4. Financial risks: [Money concerns]
+5. Regulatory/legal: [Compliance issues]
+6. [Additional risk]
+7. [Additional risk]
 
 5. ALTERNATIVE BUSINESS MODELS
-Suggest 2-3 alternative approaches or pivots that might work better
 
-6. FINAL VALIDATION AND RECOMMENDATION
-Provide a brutally honest assessment:
-- Is this idea viable? (Yes/No/Maybe with conditions)
-- What would need to change for success?
-- Should the founder pursue this or pivot?
-- Specific next steps if pursuing
+Alternative 1: [Approach]
+- Why this might work better: [Reasoning]
+- Key changes required: [List]
 
-Be direct, honest, and constructive. No sugar-coating.`,
+Alternative 2: [Approach]
+- Why this might work better: [Reasoning]
+- Key changes required: [List]
+
+Alternative 3: [Approach]
+- Why this might work better: [Reasoning]
+- Key changes required: [List]
+
+6. FINAL VALIDATION
+
+Viability: [Yes / No / Maybe with specific conditions]
+
+Required changes for success:
+1. [Change]
+2. [Change]
+3. [Change]
+
+Recommendation: [Pursue / Pivot / Abandon]
+
+Reasoning: [Brutally honest assessment, no sugar-coating]
+
+If pursuing, next steps:
+1. [Action] - Timeline: [Specific]
+2. [Action] - Timeline: [Specific]
+3. [Action] - Timeline: [Specific]
+4. [Action] - Timeline: [Specific]
+5. [Action] - Timeline: [Specific]`,
     variables: [
       {
         key: 'business_idea',
@@ -393,51 +463,71 @@ Be direct, honest, and constructive. No sugar-coating.`,
     description: 'Create comprehensive marketing campaign strategies',
     category: 'Marketing',
     aiModel: 'ChatGPT, Gemini',
-    template: `You are an expert marketing strategist specializing in {{industry}} with deep knowledge of {{marketing_channels}}.
+    template: `Create a comprehensive marketing campaign plan for:
 
-OBJECTIVE: Create a comprehensive marketing campaign plan for {{product_service}}.
-
-TARGET AUDIENCE: {{target_audience}}
-
-CAMPAIGN GOALS:
-{{campaign_goals}}
-
-BUDGET: {{budget}}
-
-TIMELINE: {{timeline}}
-
-Please provide a detailed campaign plan including:
+Product/Service: {{product_service}}
+Industry: {{industry}}
+Marketing Channels: {{marketing_channels}}
+Target Audience: {{target_audience}}
+Campaign Goals: {{campaign_goals}}
+Budget: {{budget}}
+Timeline: {{timeline}}
 
 1. CAMPAIGN STRATEGY
-- Core messaging and positioning
-- Unique value proposition
-- Key differentiators from competitors
+- Core messaging and positioning statement
+- Unique value proposition (one clear sentence)
+- 3-5 key differentiators from competitors
+- Brand voice and tone guidelines
 
 2. CHANNEL STRATEGY
-- Recommended marketing channels with rationale
-- Channel-specific tactics and content types
-- Budget allocation across channels
+For each channel in {{marketing_channels}}:
+- Why this channel fits the audience and goals
+- Specific tactics and content types
+- Budget allocation (% of {{budget}})
+- Expected ROI and timeline to results
 
-3. CONTENT CALENDAR
-- Week-by-week content themes
-- Specific content pieces for each channel
-- Publishing schedule
+3. CONTENT CALENDAR ({{timeline}})
+Week-by-week breakdown:
+- Content themes for each week
+- Specific content pieces per channel
+- Publishing schedule and frequency
+- Content formats (video, blog, social, email, etc.)
 
 4. METRICS & KPIs
-- Primary success metrics
-- Secondary metrics to track
-- Benchmarks and targets
+Primary metrics:
+- [Tied directly to {{campaign_goals}}]
+
+Secondary metrics:
+- Engagement, reach, conversion rates
+
+Benchmarks and targets:
+- Specific numbers for each metric
+- Timeline for achieving targets
 
 5. RISK MITIGATION
-- Potential challenges and how to address them
-- Contingency plans
+Identify 3-5 potential challenges:
+- What could go wrong
+- How to prevent it
+- Contingency plan if it happens
 
 6. EXECUTION ROADMAP
-- Phase 1: Pre-launch (what to do)
-- Phase 2: Launch (what to do)
-- Phase 3: Post-launch optimization (what to do)
 
-Provide actionable, specific recommendations that can be implemented immediately.`,
+Phase 1: Pre-launch (Weeks 1-2)
+- Specific tasks with owners
+- Assets to create
+- Setup requirements
+
+Phase 2: Launch (Weeks 3-6)
+- Daily/weekly activities
+- Monitoring requirements
+- Quick-win tactics
+
+Phase 3: Optimization (Weeks 7+)
+- What to measure
+- How to optimize
+- Scaling strategies
+
+Provide specific, actionable recommendations ready for immediate implementation.`,
     variables: [
       {
         key: 'industry',
@@ -502,42 +592,65 @@ Provide actionable, specific recommendations that can be implemented immediately
     description: 'Create personalized, high-converting sales emails',
     category: 'Sales',
     aiModel: 'ChatGPT, Claude',
-    template: `You are an expert sales copywriter specializing in {{industry}} with a track record of high-converting email campaigns.
+    template: `Write a high-converting sales email sequence for:
 
-CONTEXT:
-- Product/Service: {{product_service}}
-- Target Prospect: {{target_prospect}}
-- Their Pain Point: {{pain_point}}
-- Your Unique Solution: {{unique_solution}}
-- Desired Action: {{desired_action}}
+Product/Service: {{product_service}}
+Industry: {{industry}}
+Target Prospect: {{target_prospect}}
+Their Pain Point: {{pain_point}}
+Your Unique Solution: {{unique_solution}}
+Desired Action: {{desired_action}}
+Tone: {{tone}}
 
-Create a personalized sales email that:
+1. SUBJECT LINES
+Provide 3 options (under 50 characters each):
+a) [Curiosity-focused]
+b) [Value-focused]
+c) [Personalization-focused]
 
-1. SUBJECT LINE
-- Create 3 compelling subject line options
-- Each should be under 50 characters
-- Focus on curiosity, value, or personalization
+2. INITIAL EMAIL (under 150 words)
 
-2. EMAIL BODY
-- Opening: Personalized hook that shows research
-- Problem: Acknowledge their specific pain point
-- Solution: Present your offering as the answer
-- Proof: Include social proof or results
-- CTA: Clear, single call-to-action
+Subject: [Use one from above]
 
-3. FOLLOW-UP SEQUENCE
-- Follow-up #1 (3 days later)
-- Follow-up #2 (7 days later)
-- Follow-up #3 (14 days later)
+Hi [First Name],
 
-TONE: {{tone}}
+[Opening: Personalized hook showing you researched them - reference their company, recent achievement, or specific challenge]
 
-GUIDELINES:
-- Keep emails under 150 words
-- Focus on the prospect, not your company
-- Use specific numbers and results where possible
-- Make it conversational, not salesy
-- Include one clear CTA per email`,
+[Problem: Acknowledge {{pain_point}} in their own words]
+
+[Solution: Present {{unique_solution}} as the answer - focus on their benefit, not your features]
+
+[Proof: One specific result or social proof - use numbers]
+
+[CTA: Single, clear action for {{desired_action}}]
+
+[Sign off]
+
+3. FOLLOW-UP #1 (3 days later, under 100 words)
+
+Subject: [New subject line]
+
+[Brief reminder of value]
+[Different angle on the problem]
+[Soft CTA]
+
+4. FOLLOW-UP #2 (7 days later, under 100 words)
+
+Subject: [New subject line]
+
+[Case study or specific example]
+[Address potential objection]
+[Clear CTA]
+
+5. FOLLOW-UP #3 (14 days later, under 100 words)
+
+Subject: [New subject line]
+
+[Break-up email or final value offer]
+[Last chance framing]
+[Final CTA]
+
+Write all emails in {{tone}} tone. Focus on the prospect's needs, use specific numbers, and keep it conversational.`,
     variables: [
       {
         key: 'industry',
@@ -603,53 +716,100 @@ GUIDELINES:
     description: 'Develop comprehensive content marketing strategies',
     category: 'Marketing',
     aiModel: 'ChatGPT, Gemini',
-    template: `You are a content marketing strategist with expertise in {{industry}} and {{content_types}}.
+    template: `Develop a 90-day content marketing strategy for:
 
-BUSINESS CONTEXT:
-- Company/Brand: {{company}}
-- Target Audience: {{target_audience}}
-- Business Goals: {{business_goals}}
-- Current Content Efforts: {{current_efforts}}
-- Resources Available: {{resources}}
+Company/Brand: {{company}}
+Industry: {{industry}}
+Preferred Content Types: {{content_types}}
+Target Audience: {{target_audience}}
+Business Goals: {{business_goals}}
+{{#if current_efforts}}Current Content Efforts: {{current_efforts}}
+{{/if}}Available Resources: {{resources}}
 
-Create a comprehensive 90-day content strategy including:
+1. CONTENT PILLARS (3-5 core themes)
 
-1. CONTENT PILLARS
-- Identify 3-5 core content themes
-- Explain how each aligns with business goals
-- Define the value each pillar provides to the audience
+Pillar 1: [Name]
+- How it aligns with {{business_goals}}
+- Value it provides to {{target_audience}}
+- Content angle and perspective
+
+Pillar 2: [Name]
+[Same structure]
+
+Pillar 3: [Name]
+[Same structure]
+
+[Continue for 4-5 pillars]
 
 2. CONTENT MIX
-- Recommended content types and formats
-- Distribution across channels
-- Publishing frequency for each type
 
-3. TOPIC IDEATION
-- 30 specific content ideas across all pillars
-- Categorize by pillar and content type
-- Include target keywords where relevant
+For {{content_types}}:
+- Recommended split (% of total content)
+- Distribution channels for each type
+- Publishing frequency (realistic for {{resources}})
+- Production requirements and timeline
 
-4. CONTENT CALENDAR
-- Week-by-week publishing schedule
-- Content themes for each week
-- Special campaigns or seasonal content
+3. TOPIC IDEATION (30 specific ideas)
+
+Organize by pillar and content type:
+
+Pillar 1:
+- [Content Type]: [Specific topic + target keyword]
+- [Content Type]: [Specific topic + target keyword]
+[10 ideas total across pillars]
+
+[Continue for all 30 ideas]
+
+4. 90-DAY CONTENT CALENDAR
+
+Week 1-2: [Theme]
+- [Specific content pieces with format and channel]
+
+Week 3-4: [Theme]
+- [Specific content pieces with format and channel]
+
+[Continue through Week 12]
+
+Special campaigns:
+- [Any seasonal or event-based content]
 
 5. DISTRIBUTION STRATEGY
-- Primary and secondary channels
-- Channel-specific optimization tips
-- Cross-promotion tactics
+
+Primary Channels:
+- [Channel]: Optimization tips, posting frequency, best practices
+
+Secondary Channels:
+- [Channel]: Optimization tips, posting frequency, best practices
+
+Cross-Promotion:
+- How to repurpose content across channels
+- Amplification tactics
 
 6. MEASUREMENT FRAMEWORK
-- Key metrics for each content type
-- Success benchmarks
-- Reporting cadence and format
+
+For each content type:
+- Primary KPI
+- Secondary metrics
+- Success benchmarks (specific numbers)
+- Reporting: [Weekly/Monthly] dashboard
 
 7. RESOURCE ALLOCATION
-- Team roles and responsibilities
-- Tools and software needed
-- Budget recommendations
 
-Provide actionable, realistic recommendations based on stated resources.`,
+Based on {{resources}}:
+
+Team Structure:
+- [Role]: Responsibilities and time commitment
+
+Tools Needed:
+- [Tool]: Purpose and estimated cost
+
+Budget Breakdown:
+- Content creation: $X
+- Tools/software: $X
+- Promotion: $X
+- Total: $X
+
+Provide realistic recommendations that can be executed with the stated resources.`,
     variables: [
       {
         key: 'industry',
@@ -715,53 +875,139 @@ Provide actionable, realistic recommendations based on stated resources.`,
     description: 'Create sophisticated system prompts for AI agents',
     category: 'AI Development',
     aiModel: 'ChatGPT, Claude',
-    template: `You are an AI prompt engineering expert specializing in creating system prompts for AI agents.
+    template: `# ROLE DEFINITION
+You are {{agent_purpose}} specializing in {{domain}}. Your expertise serves {{target_users}}.
 
-AGENT CONTEXT:
-- Agent Purpose: {{agent_purpose}}
-- Primary Functions: {{primary_functions}}
-- Target Users: {{target_users}}
-- Domain/Industry: {{domain}}
-- Interaction Style: {{interaction_style}}
+Your capabilities:
+{{primary_functions}}
 
-Create a comprehensive system prompt that includes:
+Your limitations:
+- Only provide advice within {{domain}} expertise
+- Acknowledge when questions fall outside your knowledge
+- Never make guarantees about outcomes
 
-1. ROLE DEFINITION
-- Clear identity and expertise areas
-- Scope of capabilities
-- Limitations and boundaries
+# CORE CAPABILITIES
 
-2. CORE CAPABILITIES
-- Primary functions and tasks
-- Decision-making framework
-- Problem-solving approach
+Primary Functions:
+[Break down {{primary_functions}} into specific tasks]
+1. [Function 1]
+   - Approach: [Methodology]
+   - Decision criteria: [How you evaluate]
+   - Expected outcomes: [What users get]
 
-3. INTERACTION GUIDELINES
-- Communication style and tone
-- Response structure
-- User engagement patterns
+2. [Function 2]
+   - Approach: [Methodology]
+   - Decision criteria: [How you evaluate]
+   - Expected outcomes: [What users get]
 
-4. KNOWLEDGE BASE
-- Domain-specific knowledge areas
-- Key principles and frameworks
-- Best practices to follow
+[Continue for all functions]
 
-5. BEHAVIORAL RULES
-- What the agent should always do
-- What the agent should never do
-- Edge case handling
+Problem-Solving Approach:
+- Step 1: Understand the user's context and constraints
+- Step 2: Identify core issues and priorities
+- Step 3: Propose solutions with trade-offs
+- Step 4: Provide actionable next steps
+- When uncertain: Ask clarifying questions before proceeding
 
-6. OUTPUT FORMATTING
-- Response structure templates
-- Use of markdown, code blocks, etc.
-- Citation and source attribution
+# INTERACTION GUIDELINES
 
-7. QUALITY CONTROLS
-- Accuracy verification steps
-- Bias mitigation strategies
-- Error handling protocols
+Communication Style: {{interaction_style}}
+- Tone: [Match {{interaction_style}} - professional/friendly/technical]
+- Language: Appropriate for {{target_users}}
+- Formality: [Adjust based on {{interaction_style}}]
 
-The system prompt should be clear, comprehensive, and optimized for {{ai_model}}.`,
+Response Structure:
+- Use headers for complex topics
+- Use bullet points for lists and options
+- Use numbered lists for sequential steps
+- Keep paragraphs concise (3-4 sentences max)
+
+User Engagement:
+- Ask clarifying questions when requirements are vague
+- Confirm understanding before providing detailed solutions
+- Offer follow-up options at the end of responses
+- Reference previous context when continuing conversations
+
+# KNOWLEDGE BASE
+
+Domain Expertise ({{domain}}):
+- [Core knowledge area 1]
+- [Core knowledge area 2]
+- [Core knowledge area 3]
+- Industry frameworks and methodologies
+- Current best practices and standards
+- Common terminology and concepts
+
+Best Practices:
+- Follow {{domain}} industry standards
+- Prioritize user safety and ethical considerations
+- Recommend proven approaches over experimental ones
+- Cite sources when making specific claims
+
+# BEHAVIORAL RULES
+
+ALWAYS:
+- Verify understanding before providing solutions
+- Explain reasoning behind recommendations
+- Acknowledge limitations and uncertainties
+- Prioritize {{target_users}} needs and context
+- Maintain {{interaction_style}} tone consistently
+
+NEVER:
+- Provide advice outside {{domain}} expertise
+- Make guarantees about outcomes
+- Ignore user constraints or context
+- Use jargon without explanation for non-expert users
+- Proceed with incomplete information
+
+Edge Cases:
+- If request is outside {{domain}}: Acknowledge limitation and suggest relevant resources
+- If information is insufficient: Ask specific clarifying questions
+- If multiple valid approaches exist: Present options with trade-offs
+- If user seems confused: Simplify explanation and check understanding
+
+# OUTPUT FORMATTING
+
+Response Structure:
+[Opening: Acknowledge the question/request]
+[Main Content: Organized with headers and lists]
+[Closing: Summary and next steps]
+
+Markdown Usage:
+- Headers (##): For main sections
+- Bullet points: For lists, options, features
+- Numbered lists: For sequential steps, priorities
+- Code blocks: For technical examples, commands, code
+- Bold: For emphasis on key points
+- Tables: For comparisons, feature matrices
+
+Citations:
+- Cite specific sources for statistics and claims
+- Format: [Source Name, Year] or direct URL
+- Required for: Research findings, statistics, specific methodologies
+
+# QUALITY CONTROLS
+
+Accuracy Verification:
+- Cross-reference information with {{domain}} best practices
+- Express uncertainty when information may be outdated
+- Correct mistakes immediately when identified
+- Provide sources for verifiable claims
+
+Bias Mitigation:
+- Present multiple perspectives when applicable
+- Acknowledge personal/cultural biases in recommendations
+- Consider diverse user contexts and needs
+- Avoid assumptions about user background or resources
+
+Error Handling:
+- If input is unclear: "I need clarification on [specific aspect]. Could you provide [specific information]?"
+- If outside expertise: "This falls outside my {{domain}} expertise. I recommend consulting [relevant expert/resource]."
+- If conflicting information: "There are different approaches here. Let me outline the trade-offs: [comparison]."
+
+---
+
+Optimized for {{ai_model}}. Tailored for {{target_users}} in {{domain}}.`,
     variables: [
       {
         key: 'agent_purpose',
@@ -820,48 +1066,9 @@ The system prompt should be clear, comprehensive, and optimized for {{ai_model}}
     description: 'Create detailed prompts for AI image generation (DALL-E, Midjourney, Stable Diffusion)',
     category: 'Creative',
     aiModel: 'ChatGPT, Midjourney',
-    template: `You are an expert AI image prompt engineer specializing in {{image_style}}.
+    template: `{{subject}}, {{style}}, {{mood}} atmosphere{{#if color_palette}}, {{color_palette}} color palette{{/if}}{{#if lighting}}, {{lighting}}{{/if}}{{#if composition}}, {{composition}}{{/if}}, highly detailed, professional {{image_style}}{{#if additional_details}}, {{additional_details}}{{/if}}, masterpiece, best quality, 8k uhd, sharp focus
 
-IMAGE REQUIREMENTS:
-- Subject: {{subject}}
-- Style: {{style}}
-- Mood/Atmosphere: {{mood}}
-- Color Palette: {{color_palette}}
-- Composition: {{composition}}
-- Lighting: {{lighting}}
-- Additional Details: {{additional_details}}
-
-Create 5 detailed image generation prompts optimized for {{ai_platform}}.
-
-For each prompt, include:
-
-1. MAIN PROMPT
-- Detailed description (50-100 words)
-- Include subject, style, mood, lighting, composition
-- Use specific artistic and technical terms
-
-2. NEGATIVE PROMPT (what to avoid)
-- List unwanted elements
-- Quality issues to prevent
-
-3. TECHNICAL PARAMETERS
-- Recommended aspect ratio
-- Suggested quality/detail settings
-- Style weight recommendations
-
-4. VARIATIONS
-- 2-3 alternative versions of the prompt
-- Different angles, compositions, or styles
-
-PROMPT STRUCTURE GUIDELINES:
-- Start with the main subject
-- Add style and artistic references
-- Include technical details (lighting, camera angle, etc.)
-- Specify quality and detail level
-- Use comma-separated descriptors
-- Be specific but not overly restrictive
-
-Format each prompt clearly and make them ready to copy-paste into {{ai_platform}}.`,
+Negative Prompt: low quality, blurry, distorted, deformed, ugly, bad anatomy, watermark, text, signature, amateur, low resolution, artifacts`,
     variables: [
       {
         key: 'image_style',
